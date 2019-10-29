@@ -1,0 +1,6 @@
+
+   Link-local IPv6 Address . . . . . : fe80::e1c7:2f0c:8951:17dc%13
+   IPv4 Address. . . . . . . . . . . : 10.54.13.146
+   Subnet Mask . . . . . . . . . . . : 255.255.0.0
+   Default Gateway . . . . . . . . . : 10.54.1.1
+
