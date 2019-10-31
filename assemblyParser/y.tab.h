@@ -97,7 +97,7 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 44 "assemblyParser.y"
+#line 22 "assemblyParser.y"
 
     char* s;
     int i;

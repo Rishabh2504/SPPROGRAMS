@@ -4,10 +4,10 @@
     #include<string.h>
     int yylex();
     int yyerror();
+    void intToHex(int num);
     extern FILE *yyin;
     extern FILE *yyout;
     int lc;
-    char *arr;
     struct identifier {
         char* id;
         int loc;
@@ -17,29 +17,7 @@
     int temp, temp2, location;
 %}
 
-%token DD
-%token MVI
-%token LOADI
-%token ADD
-%token MOV
-%token INC
-%token CMP
-%token JE
-%token ADDI
-%token JMP
-%token STORE
-%token STOP
-%token SPACE
-%token NUMBER
-%token ID
-%token NEWLINE
-%token COMMENT
-%token A
-%token B
-%token C
-%token I
-%token STORI
-%token LOAD
+%token DD MVI LOADI ADD MOV INC CMP JE ADDI JMP STORE STOP SPACE NUMBER ID NEWLINE COMMENT A B C I STORI LOAD
 
 %union{
     char* s;
@@ -90,16 +68,7 @@ instr: ID SPACE DD SPACE number_list    {
     
     | MVI SPACE A ',' NUMBER    { 
         fprintf(yyout, "00");
-        char a, b;
-        if($5 / 16 > 9)
-            a = (char)($5 / 16 + 55);
-        else
-            a = (char)($5 / 16 + 48);
-        if($5 % 16 > 9)
-            b = (char)($5 % 16 + 55);
-        else
-            b = (char)($5 % 16 + 48);
-        fprintf(yyout, "%c%c000000\n", a, b);
+        intToHex($5);
         temp2 += 5; 
     }
     
@@ -117,30 +86,13 @@ instr: ID SPACE DD SPACE number_list    {
             location = 255;             //invalid or forward reference
         else
             location = symtab[k].loc;
-        if(location / 16 > 9)
-            a = (char)(location / 16 + 55);
-        else
-            a = (char)(location / 16 + 48);
-        if(location % 16 > 9)
-            b = (char)(location % 16 + 55);
-        else
-            b = (char)(location % 16 + 48);
-        fprintf(yyout, "%c%c000000\n", a, b);
+        intToHex(location);
         temp2 += 5; 
     }
     
     | MVI SPACE B ',' NUMBER    { 
         fprintf(yyout, "01");
-        char a, b;
-        if($5 / 16 > 9)
-            a = (char)($5 / 16 + 55);
-        else
-            a = (char)($5 / 16 + 48);
-        if($5 % 16 > 9)
-            b = (char)($5 % 16 + 55);
-        else
-            b = (char)($5 % 16 + 48);
-        fprintf(yyout, "%c%c000000\n", a, b);
+        intToHex($5);
         temp2 += 5; 
     }
     
@@ -158,30 +110,13 @@ instr: ID SPACE DD SPACE number_list    {
             location = 255;             //invalid or forward reference
         else
             location = symtab[k].loc;
-        if(location / 16 > 9)
-            a = (char)(location / 16 + 55);
-        else
-            a = (char)(location / 16 + 48);
-        if(location % 16 > 9)
-            b = (char)(location % 16 + 55);
-        else
-            b = (char)(location % 16 + 48);
-        fprintf(yyout, "%c%c000000\n", a, b);
+        intToHex(location);
         temp2 += 5; 
     }
     
     | MVI SPACE C ',' NUMBER    { 
         fprintf(yyout, "02");
-        char a, b;
-        if($5 / 16 > 9)
-            a = (char)($5 / 16 + 55);
-        else
-            a = (char)($5 / 16 + 48);
-        if($5 % 16 > 9)
-            b = (char)($5 % 16 + 55);
-        else
-            b = (char)($5 % 16 + 48);
-        fprintf(yyout, "%c%c000000\n", a, b);
+        intToHex($5);
         temp2 += 5; 
     }
     
@@ -199,30 +134,13 @@ instr: ID SPACE DD SPACE number_list    {
             location = 255;                 //invalid or forward reference
         else
             location = symtab[k].loc;
-        if(location / 16 > 9)
-            a = (char)(location / 16 + 55);
-        else
-            a = (char)(location / 16 + 48);
-        if(location % 16 > 9)
-            b = (char)(location % 16 + 55);
-        else
-            b = (char)(location % 16 + 48);
-        fprintf(yyout, "%c%c000000\n", a, b);
+        intToHex(location);
         temp2 += 5; 
     }
     
     | MVI SPACE I ',' NUMBER    { 
         fprintf(yyout, "03");
-        char a, b;
-        if($5 / 16 > 9)
-            a = (char)($5 / 16 + 55);
-        else
-            a = (char)($5 / 16 + 48);
-        if($5 % 16 > 9)
-            b = (char)($5 % 16 + 55);
-        else
-            b = (char)($5 % 16 + 48);
-        fprintf(yyout, "%c%c000000\n", a, b);
+        intToHex($5);
         temp2 += 5; 
     }
     
@@ -241,30 +159,13 @@ instr: ID SPACE DD SPACE number_list    {
             location = 255;                     //invalid or forward reference
         else
             location = symtab[k].loc;
-        if(location / 16 > 9)
-            a = (char)(location / 16 + 55);
-        else
-            a = (char)(location / 16 + 48);
-        if(location % 16 > 9)
-            b = (char)(location % 16 + 55);
-        else
-            b = (char)(location % 16 + 48);
-        fprintf(yyout, "%c%c000000\n", a, b);
+        intToHex(location);
         temp2 += 5; 
     }
     
     | LOAD SPACE NUMBER     { 
         fprintf(yyout, "04");
-        char a, b;
-        if($3 / 16 > 9)
-            a = (char)($3 / 16 + 55);
-        else
-            a = (char)($3 / 16 + 48);
-        if($3 % 16 > 9)
-            b = (char)($3 % 16 + 55);
-        else
-            b = (char)($3 % 16 + 48);
-        fprintf(yyout, "%c%c000000\n", a, b);
+        intToHex($3);
         temp2 += 5; 
     }
     
@@ -282,15 +183,7 @@ instr: ID SPACE DD SPACE number_list    {
             location = 255;
         else
             location = symtab[k].loc;
-        if(location / 16 > 9)
-            a = (char)(location / 16 + 55);
-        else
-            a = (char)(location / 16 + 48);
-        if(location % 16 > 9)
-            b = (char)(location % 16 + 55);
-        else
-            b = (char)(location % 16 + 48);
-        fprintf(yyout, "%c%c000000\n", a, b);
+        intToHex(location);
         temp2 += 5; 
     }
     
@@ -308,15 +201,7 @@ instr: ID SPACE DD SPACE number_list    {
             location = 255;
         else
             location = symtab[k].loc;
-        if(location / 16 > 9)
-            a = (char)(location / 16 + 55);
-        else
-            a = (char)(location / 16 + 48);
-        if(location % 16 > 9)
-            b = (char)(location % 16 + 55);
-        else
-            b = (char)(location % 16 + 48);
-        fprintf(yyout, "%c%c000000\n", a, b);
+        intToHex(location);
         temp2 += 5; 
     }
     
@@ -387,16 +272,7 @@ instr: ID SPACE DD SPACE number_list    {
     
     | CMP SPACE A ',' NUMBER    { 
         fprintf(yyout, "13");
-        char a, b;
-        if($5 / 16 > 9)
-            a = (char)($5 / 16 + 55);
-        else
-            a = (char)($5 / 16 + 48);
-        if($5 % 16 > 9)
-            b = (char)($5 % 16 + 55);
-        else
-            b = (char)($5 % 16 + 48);
-        fprintf(yyout, "%c%c000000\n", a, b);
+        intToHex($5);
         temp2 += 5; 
     }
     
@@ -414,30 +290,13 @@ instr: ID SPACE DD SPACE number_list    {
             location = 255;
         else
             location = symtab[k].loc;
-        if(location / 16 > 9)
-            a = (char)(location / 16 + 55);
-        else
-            a = (char)(location / 16 + 48);
-        if(location % 16 > 9)
-            b = (char)(location % 16 + 55);
-        else
-            b = (char)(location % 16 + 48);
-        fprintf(yyout, "%c%c000000\n", a, b);
+        intToHex(location);
         temp2 += 5; 
     }
     
     | CMP SPACE B ',' NUMBER    { 
         fprintf(yyout, "14");
-        char a, b;
-        if($5 / 16 > 9)
-            a = (char)($5 / 16 + 55);
-        else
-            a = (char)($5 / 16 + 48);
-        if($5 % 16 > 9)
-            b = (char)($5 % 16 + 55);
-        else
-            b = (char)($5 % 16 + 48);
-        fprintf(yyout, "%c%c000000\n", a, b);
+        intToHex($5);
         temp2 += 5; 
     }
     
@@ -455,30 +314,14 @@ instr: ID SPACE DD SPACE number_list    {
             location = 255;
         else
             location = symtab[k].loc;
-        if(location / 16 > 9)
-            a = (char)(location / 16 + 55);
-        else
-            a = (char)(location / 16 + 48);
-        if(location % 16 > 9)
-            b = (char)(location % 16 + 55);
-        else
-            b = (char)(location % 16 + 48);
-        fprintf(yyout, "%c%c000000\n", a, b);
+        intToHex(location);
         temp2 += 5; 
     }
     
     | CMP SPACE C ',' NUMBER    { 
         fprintf(yyout, "15");
         char a, b;
-        if($5 / 16 > 9)
-            a = (char)($5 / 16 + 55);
-        else
-            a = (char)($5 / 16 + 48);
-        if($5 % 16 > 9)
-            b = (char)($5 % 16 + 55);
-        else
-            b = (char)($5 % 16 + 48);
-        fprintf(yyout, "%c%c000000\n", a, b);
+        intToHex($5);
         temp2 += 5; 
     }
     
@@ -496,15 +339,7 @@ instr: ID SPACE DD SPACE number_list    {
             location = 255;
         else
             location = symtab[k].loc;
-        if(location / 16 > 9)
-            a = (char)(location / 16 + 55);
-        else
-            a = (char)(location / 16 + 48);
-        if(location % 16 > 9)
-            b = (char)(location % 16 + 55);
-        else
-            b = (char)(location % 16 + 48);
-        fprintf(yyout, "%c%c000000\n", a, b);
+        intToHex(location);
         temp2 += 5; 
     }
     
@@ -522,30 +357,14 @@ instr: ID SPACE DD SPACE number_list    {
             location = 255;
         else
             location = symtab[k].loc;
-        if(location / 16 > 9)
-            a = (char)(location / 16 + 55);
-        else
-            a = (char)(location / 16 + 48);
-        if(location % 16 > 9)
-            b = (char)(location % 16 + 55);
-        else
-            b = (char)(location % 16 + 48);
-        fprintf(yyout, "%c%c000000\n", a, b);
+        intToHex(location);
         temp2 += 5; 
     }
     
     | ADDI SPACE NUMBER     { 
         fprintf(yyout, "16");
         char a, b;
-        if($3 / 16 > 9)
-            a = (char)($3 / 16 + 55);
-        else
-            a = (char)($3 / 16 + 48);
-        if($3 % 16 > 9)
-            b = (char)($3 % 16 + 55);
-        else
-            b = (char)($3 % 16 + 48);
-        fprintf(yyout, "%c%c000000\n", a, b);
+        intToHex($3);
         temp2 += 5; 
     }
     
@@ -563,15 +382,7 @@ instr: ID SPACE DD SPACE number_list    {
             location = 255;
         else
             location = symtab[k].loc;
-        if(location / 16 > 9)
-            a = (char)(location / 16 + 55);
-        else
-            a = (char)(location / 16 + 48);
-        if(location % 16 > 9)
-            b = (char)(location % 16 + 55);
-        else
-            b = (char)(location % 16 + 48);
-        fprintf(yyout, "%c%c000000\n", a, b);
+        intToHex(location);
         temp2 += 5; 
     }
     
@@ -589,48 +400,35 @@ instr: ID SPACE DD SPACE number_list    {
             location = 255;
         else
             location = symtab[k].loc;
-        if(location / 16 > 9)
-            a = (char)(location / 16 + 55);
-        else
-            a = (char)(location / 16 + 48);
-        if(location % 16 > 9)
-            b = (char)(location % 16 + 55);
-        else
-            b = (char)(location % 16 + 48);
-        fprintf(yyout, "%c%c000000\n", a, b);
+        intToHex(location);
         temp2 += 5; 
     }
     ;
 
 number_list: NUMBER     { 
-        char a, b;
-        if($1 / 16 > 9)
-            a = (char)($1 / 16 + 55);
-        else
-            a = (char)($1 / 16 + 48);
-        if($1 % 16 > 9)
-            b = (char)($1 % 16 + 55);
-        else
-            b = (char)($1 % 16 + 48);
-        fprintf(yyout, "%c%c000000\n", a, b);
+        intToHex($1);
         temp += 4; 
     }
     | number_list ',' NUMBER    { 
-        char a, b;
-        if($3 / 16 > 9)
-            a = (char)($3 / 16 + 55);
-        else
-            a = (char)($3 / 16 + 48);
-        if($3 % 16 > 9)
-            b = (char)($3 % 16 + 55);
-        else
-            b = (char)($3 % 16 + 48);
-        fprintf(yyout, "%c%c000000\n", a, b);
+        intToHex($3);
         temp += 4; 
     }
     ;
 
 %%
+
+void intToHex(int num){
+    char a, b;
+        if(num / 16 > 9)
+            a = (char)(num / 16 + 55);
+        else
+            a = (char)(num / 16 + 48);
+        if(num % 16 > 9)
+            b = (char)(num % 16 + 55);
+        else
+            b = (char)(num % 16 + 48);
+        fprintf(yyout, "%c%c000000\n", a, b);
+}
 
 int yyerror(const char *s){
     fclose(yyin);
