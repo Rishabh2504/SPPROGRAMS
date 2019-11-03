@@ -634,131 +634,131 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 YY_RULE_SETUP
 #line 10 "assemblyParser.l"
-{ return A; }
+return A;
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
 #line 11 "assemblyParser.l"
-{ return B; }
+return B; 
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
 #line 12 "assemblyParser.l"
-{ return C; }
+return C; 
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
 #line 13 "assemblyParser.l"
-{ return I; }
+return I; 
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
 #line 14 "assemblyParser.l"
-{ return DD; }
+return DD; 
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
 #line 15 "assemblyParser.l"
-{ return MVI; }
+return MVI; 
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
 #line 16 "assemblyParser.l"
-{ return LOADI; }
+return LOADI; 
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
 #line 17 "assemblyParser.l"
-{ return STORI; }
+return STORI; 
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
 #line 18 "assemblyParser.l"
-{ return ADD; }
+return ADD; 
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
 #line 19 "assemblyParser.l"
-{ return MOV; }
+return MOV; 
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
 #line 20 "assemblyParser.l"
-{ return INC; }
+return INC; 
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
 #line 21 "assemblyParser.l"
-{ return CMP; }
+return CMP; 
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
 #line 22 "assemblyParser.l"
-{ return JE; }
+return JE; 
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
 #line 23 "assemblyParser.l"
-{ return ADDI; }
+return ADDI; 
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
 #line 24 "assemblyParser.l"
-{ return JMP; }
+return JMP; 
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
 #line 25 "assemblyParser.l"
-{ return LOAD; }
+return LOAD; 
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
 #line 26 "assemblyParser.l"
-{ return STORE; }
+return STORE; 
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
 #line 27 "assemblyParser.l"
-{ return STOP; }
+return STOP; 
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
 #line 28 "assemblyParser.l"
-{ return SPACE; }
+return SPACE; 
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
 #line 29 "assemblyParser.l"
 { 
-    yylval.i = atoi(yytext);
-    return NUMBER; 
-}
+                            yylval.i = atoi(yytext);
+                            return NUMBER; 
+                        }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
 #line 33 "assemblyParser.l"
 { 
-    char *c = malloc(sizeof(char) * (yyleng + 1));
-    c[yyleng] = 0;
-    strncpy(c, yytext, yyleng);
-    yylval.s = c;
-    return ID;
-}
+                            char *c = malloc(sizeof(char) * (yyleng + 1));
+                            c[yyleng] = 0;
+                            strncpy(c, yytext, yyleng);
+                            yylval.s = c;
+                            return ID;
+                        }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
 #line 40 "assemblyParser.l"
-{ return NEWLINE; }
+return NEWLINE; 
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
 #line 41 "assemblyParser.l"
-{ return COMMENT; }
+return COMMENT; 
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
 #line 42 "assemblyParser.l"
-{ return *yytext; }
+return *yytext; 
 	YY_BREAK
 case 25:
 YY_RULE_SETUP

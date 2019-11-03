@@ -5,6 +5,7 @@
     int yylex();
     int yyerror();
     void intToHex(int num);
+    void findLocation(char * c);
     extern FILE *yyin;
     extern FILE *yyout;
     int lc;
@@ -30,7 +31,7 @@
 %%
 
 start: statement_list NEWLINE STOP {
-            printf("Program syntactically correct\n");
+            printf("Syntax is correct\n");
             return 0;
         }
     ;
@@ -74,19 +75,7 @@ instr: ID SPACE DD SPACE number_list    {
     
     | MVI SPACE A ',' ID    { 
         fprintf(yyout, "00");
-        char a, b;
-        int k = -1;
-        for(int i = 0; i < ids; i++){
-            if(!strcmp(symtab[i].id, $5)){
-                k = i;
-                break;
-            }
-        }
-        if(k == -1)
-            location = 255;             //invalid or forward reference
-        else
-            location = symtab[k].loc;
-        intToHex(location);
+        findLocation($5);
         temp2 += 5; 
     }
     
@@ -98,19 +87,7 @@ instr: ID SPACE DD SPACE number_list    {
     
     | MVI SPACE B ',' ID    { 
         fprintf(yyout, "01");
-        char a, b;
-        int k = -1;
-        for(int i = 0; i < ids; i++){
-            if(!strcmp(symtab[i].id, $5)){
-                k = i;
-                break;
-            }
-        }
-        if(k == -1)
-            location = 255;             //invalid or forward reference
-        else
-            location = symtab[k].loc;
-        intToHex(location);
+        findLocation($5);
         temp2 += 5; 
     }
     
@@ -122,19 +99,7 @@ instr: ID SPACE DD SPACE number_list    {
     
     | MVI SPACE C ',' ID    { 
         fprintf(yyout, "02");
-        char a, b;
-        int k = -1;
-        for(int i = 0; i < ids; i++){
-            if(!strcmp(symtab[i].id, $5)){
-                k = i;
-                break;
-            }
-        }
-        if(k == -1)
-            location = 255;                 //invalid or forward reference
-        else
-            location = symtab[k].loc;
-        intToHex(location);
+        findLocation($5);
         temp2 += 5; 
     }
     
@@ -146,20 +111,7 @@ instr: ID SPACE DD SPACE number_list    {
     
     | MVI SPACE I ',' ID    { 
         fprintf(yyout, "03");
-        char a, b;
-        int k = -1;
-        
-        for(int i = 0; i < ids; i++){
-            if(!strcmp(symtab[i].id, $5)){
-                k = i;
-                break;
-            }
-        }
-        if(k == -1)
-            location = 255;                     //invalid or forward reference
-        else
-            location = symtab[k].loc;
-        intToHex(location);
+        findLocation($5);
         temp2 += 5; 
     }
     
@@ -171,37 +123,13 @@ instr: ID SPACE DD SPACE number_list    {
     
     | LOAD SPACE ID     { 
         fprintf(yyout, "04");
-        char a, b;
-        int k = -1;
-        for(int i = 0; i < ids; i++){
-            if(!strcmp(symtab[i].id, $3)){
-                k = i;
-                break;
-            }
-        }
-        if(k == -1)
-            location = 255;
-        else
-            location = symtab[k].loc;
-        intToHex(location);
+        findLocation($3);
         temp2 += 5; 
     }
     
     | STORE SPACE ID    { 
         fprintf(yyout, "05");
-        char a, b;
-        int k = -1;
-        for(int i = 0; i < ids; i++){
-            if(!strcmp(symtab[i].id, $3)){
-                k = i;
-                break;
-            }
-        }
-        if(k == -1)
-            location = 255;
-        else
-            location = symtab[k].loc;
-        intToHex(location);
+        findLocation($3);
         temp2 += 5; 
     }
     
@@ -278,19 +206,7 @@ instr: ID SPACE DD SPACE number_list    {
     
     | CMP SPACE A ',' ID    { 
         fprintf(yyout, "13");
-        char a, b;
-        int k = -1;
-        for(int i = 0; i < ids; i++){
-            if(!strcmp(symtab[i].id, $5)){
-                k = i;
-                break;
-            }
-        }
-        if(k == -1)
-            location = 255;
-        else
-            location = symtab[k].loc;
-        intToHex(location);
+        findLocation($5);
         temp2 += 5; 
     }
     
@@ -345,62 +261,25 @@ instr: ID SPACE DD SPACE number_list    {
     
     | ADDI SPACE ID     { 
         fprintf(yyout, "16");
-        char a, b;
-        int k = -1;
-        for(int i = 0; i < ids; i++){
-            if(!strcmp(symtab[i].id, $3)){
-                k = i;
-                break;
-            }
-        }
-        if(k == -1)
-            location = 255;
-        else
-            location = symtab[k].loc;
-        intToHex(location);
+        findLocation($3);
         temp2 += 5; 
     }
     
     | ADDI SPACE NUMBER     { 
         fprintf(yyout, "16");
-        char a, b;
         intToHex($3);
         temp2 += 5; 
     }
     
     | JE SPACE ID   { 
         fprintf(yyout, "17");
-        char a, b;
-        int k = -1;
-        for(int i = 0; i < ids; i++){
-            if(!strcmp(symtab[i].id, $3)){
-                k = i;
-                break;
-            }
-        }
-        if(k == -1)
-            location = 255;
-        else
-            location = symtab[k].loc;
-        intToHex(location);
+        findLocation($3);
         temp2 += 5; 
     }
     
     | JMP SPACE ID  { 
         fprintf(yyout, "18");
-        char a, b;
-        int k = -1;
-        for(int i = 0; i < ids; i++){
-            if(!strcmp(symtab[i].id, $3)){
-                k = i;
-                break;
-            }
-        }
-        if(k == -1)
-            location = 255;
-        else
-            location = symtab[k].loc;
-        intToHex(location);
+        findLocation($3);
         temp2 += 5; 
     }
     ;
@@ -430,6 +309,21 @@ void intToHex(int num){
         fprintf(yyout, "%c%c000000\n", a, b);
 }
 
+void findLocation(char *c){
+    int k = -1;
+    for(int i = 0; i < ids; i++){
+        if(!strcmp(symtab[i].id, c)){
+            k = i;
+            break;
+        }
+    }
+    if(k == -1)
+        location = 255;          //invalid or forward reference
+    else
+        location = symtab[k].loc;
+    intToHex(location);
+}
+
 int yyerror(const char *s){
     fclose(yyin);
     fclose(yyout);
@@ -442,7 +336,7 @@ int yyerror(const char *s){
 
 
 int main(){
-    // FILE *yyin;
+
     yyin = fopen("assemblyProgram.txt", "r");
     yyout = fopen("machineCode.txt", "w");
     if(yyin == NULL || yyout == NULL){
@@ -451,8 +345,8 @@ int main(){
     else{
         yyparse();
     }
-    // for(int i = 0; i < ids; i++)
-    //     printf("%s %d\n", symtab[i].id, symtab[i].loc);
+    for(int i = 0; i < ids; i++)
+    printf("%s %d\n", symtab[i].id, symtab[i].loc);
     fprintf(yyout, "19\n");
     fclose(yyout);
     fclose(yyin);

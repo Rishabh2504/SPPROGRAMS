@@ -76,6 +76,7 @@
     int yylex();
     int yyerror();
     void intToHex(int num);
+    void findLocation(char * c);
     extern FILE *yyin;
     extern FILE *yyout;
     int lc;
@@ -89,7 +90,7 @@
 
 
 /* Line 189 of yacc.c  */
-#line 93 "y.tab.c"
+#line 94 "y.tab.c"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -174,7 +175,7 @@ typedef union YYSTYPE
 {
 
 /* Line 214 of yacc.c  */
-#line 22 "assemblyParser.y"
+#line 23 "assemblyParser.y"
 
     char* s;
     int i;
@@ -182,7 +183,7 @@ typedef union YYSTYPE
 
 
 /* Line 214 of yacc.c  */
-#line 186 "y.tab.c"
+#line 187 "y.tab.c"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -194,7 +195,7 @@ typedef union YYSTYPE
 
 
 /* Line 264 of yacc.c  */
-#line 198 "y.tab.c"
+#line 199 "y.tab.c"
 
 #ifdef short
 # undef short
@@ -503,11 +504,11 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,    32,    32,    38,    39,    42,    43,    51,    57,    58,
-      61,    69,    75,    93,    99,   117,   123,   141,   147,   166,
-     172,   190,   208,   213,   218,   223,   228,   233,   238,   243,
-     248,   253,   258,   263,   268,   273,   279,   297,   303,   321,
-     328,   346,   364,   371,   389,   408,   412
+       0,    33,    33,    39,    40,    43,    44,    52,    58,    59,
+      62,    70,    76,    82,    88,    94,   100,   106,   112,   118,
+     124,   130,   136,   141,   146,   151,   156,   161,   166,   171,
+     176,   181,   186,   191,   196,   201,   207,   213,   219,   237,
+     244,   262,   268,   274,   280,   287,   291
 };
 #endif
 
@@ -1467,9 +1468,9 @@ yyreduce:
         case 2:
 
 /* Line 1455 of yacc.c  */
-#line 32 "assemblyParser.y"
+#line 33 "assemblyParser.y"
     {
-            printf("Program syntactically correct\n");
+            printf("Syntax is correct\n");
             return 0;
         }
     break;
@@ -1477,7 +1478,7 @@ yyreduce:
   case 6:
 
 /* Line 1455 of yacc.c  */
-#line 43 "assemblyParser.y"
+#line 44 "assemblyParser.y"
     {
         symtab[ids].id = (yyvsp[(1) - (5)].s); 
         symtab[ids].loc = lc;
@@ -1490,7 +1491,7 @@ yyreduce:
   case 7:
 
 /* Line 1455 of yacc.c  */
-#line 51 "assemblyParser.y"
+#line 52 "assemblyParser.y"
     {
         lc += temp2;
         temp2 = 0;
@@ -1500,7 +1501,7 @@ yyreduce:
   case 10:
 
 /* Line 1455 of yacc.c  */
-#line 61 "assemblyParser.y"
+#line 62 "assemblyParser.y"
     { 
         symtab[ids].id = (yyvsp[(1) - (5)].s); 
         symtab[ids].loc = lc;
@@ -1513,7 +1514,7 @@ yyreduce:
   case 11:
 
 /* Line 1455 of yacc.c  */
-#line 69 "assemblyParser.y"
+#line 70 "assemblyParser.y"
     { 
         fprintf(yyout, "00");
         intToHex((yyvsp[(5) - (5)].i));
@@ -1524,22 +1525,10 @@ yyreduce:
   case 12:
 
 /* Line 1455 of yacc.c  */
-#line 75 "assemblyParser.y"
+#line 76 "assemblyParser.y"
     { 
         fprintf(yyout, "00");
-        char a, b;
-        int k = -1;
-        for(int i = 0; i < ids; i++){
-            if(!strcmp(symtab[i].id, (yyvsp[(5) - (5)].s))){
-                k = i;
-                break;
-            }
-        }
-        if(k == -1)
-            location = 255;             //invalid or forward reference
-        else
-            location = symtab[k].loc;
-        intToHex(location);
+        findLocation((yyvsp[(5) - (5)].s));
         temp2 += 5; 
     }
     break;
@@ -1547,7 +1536,7 @@ yyreduce:
   case 13:
 
 /* Line 1455 of yacc.c  */
-#line 93 "assemblyParser.y"
+#line 82 "assemblyParser.y"
     { 
         fprintf(yyout, "01");
         intToHex((yyvsp[(5) - (5)].i));
@@ -1558,22 +1547,10 @@ yyreduce:
   case 14:
 
 /* Line 1455 of yacc.c  */
-#line 99 "assemblyParser.y"
+#line 88 "assemblyParser.y"
     { 
         fprintf(yyout, "01");
-        char a, b;
-        int k = -1;
-        for(int i = 0; i < ids; i++){
-            if(!strcmp(symtab[i].id, (yyvsp[(5) - (5)].s))){
-                k = i;
-                break;
-            }
-        }
-        if(k == -1)
-            location = 255;             //invalid or forward reference
-        else
-            location = symtab[k].loc;
-        intToHex(location);
+        findLocation((yyvsp[(5) - (5)].s));
         temp2 += 5; 
     }
     break;
@@ -1581,7 +1558,7 @@ yyreduce:
   case 15:
 
 /* Line 1455 of yacc.c  */
-#line 117 "assemblyParser.y"
+#line 94 "assemblyParser.y"
     { 
         fprintf(yyout, "02");
         intToHex((yyvsp[(5) - (5)].i));
@@ -1592,22 +1569,10 @@ yyreduce:
   case 16:
 
 /* Line 1455 of yacc.c  */
-#line 123 "assemblyParser.y"
+#line 100 "assemblyParser.y"
     { 
         fprintf(yyout, "02");
-        char a, b;
-        int k = -1;
-        for(int i = 0; i < ids; i++){
-            if(!strcmp(symtab[i].id, (yyvsp[(5) - (5)].s))){
-                k = i;
-                break;
-            }
-        }
-        if(k == -1)
-            location = 255;                 //invalid or forward reference
-        else
-            location = symtab[k].loc;
-        intToHex(location);
+        findLocation((yyvsp[(5) - (5)].s));
         temp2 += 5; 
     }
     break;
@@ -1615,7 +1580,7 @@ yyreduce:
   case 17:
 
 /* Line 1455 of yacc.c  */
-#line 141 "assemblyParser.y"
+#line 106 "assemblyParser.y"
     { 
         fprintf(yyout, "03");
         intToHex((yyvsp[(5) - (5)].i));
@@ -1626,23 +1591,10 @@ yyreduce:
   case 18:
 
 /* Line 1455 of yacc.c  */
-#line 147 "assemblyParser.y"
+#line 112 "assemblyParser.y"
     { 
         fprintf(yyout, "03");
-        char a, b;
-        int k = -1;
-        
-        for(int i = 0; i < ids; i++){
-            if(!strcmp(symtab[i].id, (yyvsp[(5) - (5)].s))){
-                k = i;
-                break;
-            }
-        }
-        if(k == -1)
-            location = 255;                     //invalid or forward reference
-        else
-            location = symtab[k].loc;
-        intToHex(location);
+        findLocation((yyvsp[(5) - (5)].s));
         temp2 += 5; 
     }
     break;
@@ -1650,7 +1602,7 @@ yyreduce:
   case 19:
 
 /* Line 1455 of yacc.c  */
-#line 166 "assemblyParser.y"
+#line 118 "assemblyParser.y"
     { 
         fprintf(yyout, "04");
         intToHex((yyvsp[(3) - (3)].i));
@@ -1661,22 +1613,10 @@ yyreduce:
   case 20:
 
 /* Line 1455 of yacc.c  */
-#line 172 "assemblyParser.y"
+#line 124 "assemblyParser.y"
     { 
         fprintf(yyout, "04");
-        char a, b;
-        int k = -1;
-        for(int i = 0; i < ids; i++){
-            if(!strcmp(symtab[i].id, (yyvsp[(3) - (3)].s))){
-                k = i;
-                break;
-            }
-        }
-        if(k == -1)
-            location = 255;
-        else
-            location = symtab[k].loc;
-        intToHex(location);
+        findLocation((yyvsp[(3) - (3)].s));
         temp2 += 5; 
     }
     break;
@@ -1684,22 +1624,10 @@ yyreduce:
   case 21:
 
 /* Line 1455 of yacc.c  */
-#line 190 "assemblyParser.y"
+#line 130 "assemblyParser.y"
     { 
         fprintf(yyout, "05");
-        char a, b;
-        int k = -1;
-        for(int i = 0; i < ids; i++){
-            if(!strcmp(symtab[i].id, (yyvsp[(3) - (3)].s))){
-                k = i;
-                break;
-            }
-        }
-        if(k == -1)
-            location = 255;
-        else
-            location = symtab[k].loc;
-        intToHex(location);
+        findLocation((yyvsp[(3) - (3)].s));
         temp2 += 5; 
     }
     break;
@@ -1707,7 +1635,7 @@ yyreduce:
   case 22:
 
 /* Line 1455 of yacc.c  */
-#line 208 "assemblyParser.y"
+#line 136 "assemblyParser.y"
     { 
         fprintf(yyout, "06\n");
         temp2 += 1; 
@@ -1717,7 +1645,7 @@ yyreduce:
   case 23:
 
 /* Line 1455 of yacc.c  */
-#line 213 "assemblyParser.y"
+#line 141 "assemblyParser.y"
     { 
         fprintf(yyout, "07\n");
         temp2 += 1; 
@@ -1727,7 +1655,7 @@ yyreduce:
   case 24:
 
 /* Line 1455 of yacc.c  */
-#line 218 "assemblyParser.y"
+#line 146 "assemblyParser.y"
     { 
         fprintf(yyout, "08\n");
         temp2 += 1; 
@@ -1737,7 +1665,7 @@ yyreduce:
   case 25:
 
 /* Line 1455 of yacc.c  */
-#line 223 "assemblyParser.y"
+#line 151 "assemblyParser.y"
     { 
         fprintf(yyout, "09\n");
         temp2 += 1; 
@@ -1747,7 +1675,7 @@ yyreduce:
   case 26:
 
 /* Line 1455 of yacc.c  */
-#line 228 "assemblyParser.y"
+#line 156 "assemblyParser.y"
     { 
         fprintf(yyout, "0A\n");
         temp2 += 1; 
@@ -1757,7 +1685,7 @@ yyreduce:
   case 27:
 
 /* Line 1455 of yacc.c  */
-#line 233 "assemblyParser.y"
+#line 161 "assemblyParser.y"
     { 
         fprintf(yyout, "0B\n");
         temp2 += 1; 
@@ -1767,7 +1695,7 @@ yyreduce:
   case 28:
 
 /* Line 1455 of yacc.c  */
-#line 238 "assemblyParser.y"
+#line 166 "assemblyParser.y"
     { 
         fprintf(yyout, "0C\n");
         temp2 += 1; 
@@ -1777,7 +1705,7 @@ yyreduce:
   case 29:
 
 /* Line 1455 of yacc.c  */
-#line 243 "assemblyParser.y"
+#line 171 "assemblyParser.y"
     { 
         fprintf(yyout, "0D\n");
         temp2 += 1; 
@@ -1787,7 +1715,7 @@ yyreduce:
   case 30:
 
 /* Line 1455 of yacc.c  */
-#line 248 "assemblyParser.y"
+#line 176 "assemblyParser.y"
     { 
         fprintf(yyout, "0E\n");
         temp2 += 1; 
@@ -1797,7 +1725,7 @@ yyreduce:
   case 31:
 
 /* Line 1455 of yacc.c  */
-#line 253 "assemblyParser.y"
+#line 181 "assemblyParser.y"
     { 
         fprintf(yyout, "0F\n");
         temp2 += 1; 
@@ -1807,7 +1735,7 @@ yyreduce:
   case 32:
 
 /* Line 1455 of yacc.c  */
-#line 258 "assemblyParser.y"
+#line 186 "assemblyParser.y"
     { 
         fprintf(yyout, "10\n");
         temp2 += 1; 
@@ -1817,7 +1745,7 @@ yyreduce:
   case 33:
 
 /* Line 1455 of yacc.c  */
-#line 263 "assemblyParser.y"
+#line 191 "assemblyParser.y"
     { 
         fprintf(yyout, "11\n");
         temp2 += 1; 
@@ -1827,7 +1755,7 @@ yyreduce:
   case 34:
 
 /* Line 1455 of yacc.c  */
-#line 268 "assemblyParser.y"
+#line 196 "assemblyParser.y"
     { 
         fprintf(yyout, "12\n");
         temp2 += 1; 
@@ -1837,7 +1765,7 @@ yyreduce:
   case 35:
 
 /* Line 1455 of yacc.c  */
-#line 273 "assemblyParser.y"
+#line 201 "assemblyParser.y"
     { 
         fprintf(yyout, "13");
         intToHex((yyvsp[(5) - (5)].i));
@@ -1848,22 +1776,10 @@ yyreduce:
   case 36:
 
 /* Line 1455 of yacc.c  */
-#line 279 "assemblyParser.y"
+#line 207 "assemblyParser.y"
     { 
         fprintf(yyout, "13");
-        char a, b;
-        int k = -1;
-        for(int i = 0; i < ids; i++){
-            if(!strcmp(symtab[i].id, (yyvsp[(5) - (5)].s))){
-                k = i;
-                break;
-            }
-        }
-        if(k == -1)
-            location = 255;
-        else
-            location = symtab[k].loc;
-        intToHex(location);
+        findLocation((yyvsp[(5) - (5)].s));
         temp2 += 5; 
     }
     break;
@@ -1871,7 +1787,7 @@ yyreduce:
   case 37:
 
 /* Line 1455 of yacc.c  */
-#line 297 "assemblyParser.y"
+#line 213 "assemblyParser.y"
     { 
         fprintf(yyout, "14");
         intToHex((yyvsp[(5) - (5)].i));
@@ -1882,7 +1798,7 @@ yyreduce:
   case 38:
 
 /* Line 1455 of yacc.c  */
-#line 303 "assemblyParser.y"
+#line 219 "assemblyParser.y"
     { 
         fprintf(yyout, "14");
         char a, b;
@@ -1905,7 +1821,7 @@ yyreduce:
   case 39:
 
 /* Line 1455 of yacc.c  */
-#line 321 "assemblyParser.y"
+#line 237 "assemblyParser.y"
     { 
         fprintf(yyout, "15");
         char a, b;
@@ -1917,7 +1833,7 @@ yyreduce:
   case 40:
 
 /* Line 1455 of yacc.c  */
-#line 328 "assemblyParser.y"
+#line 244 "assemblyParser.y"
     { 
         fprintf(yyout, "15");
         char a, b;
@@ -1940,22 +1856,10 @@ yyreduce:
   case 41:
 
 /* Line 1455 of yacc.c  */
-#line 346 "assemblyParser.y"
+#line 262 "assemblyParser.y"
     { 
         fprintf(yyout, "16");
-        char a, b;
-        int k = -1;
-        for(int i = 0; i < ids; i++){
-            if(!strcmp(symtab[i].id, (yyvsp[(3) - (3)].s))){
-                k = i;
-                break;
-            }
-        }
-        if(k == -1)
-            location = 255;
-        else
-            location = symtab[k].loc;
-        intToHex(location);
+        findLocation((yyvsp[(3) - (3)].s));
         temp2 += 5; 
     }
     break;
@@ -1963,10 +1867,9 @@ yyreduce:
   case 42:
 
 /* Line 1455 of yacc.c  */
-#line 364 "assemblyParser.y"
+#line 268 "assemblyParser.y"
     { 
         fprintf(yyout, "16");
-        char a, b;
         intToHex((yyvsp[(3) - (3)].i));
         temp2 += 5; 
     }
@@ -1975,22 +1878,10 @@ yyreduce:
   case 43:
 
 /* Line 1455 of yacc.c  */
-#line 371 "assemblyParser.y"
+#line 274 "assemblyParser.y"
     { 
         fprintf(yyout, "17");
-        char a, b;
-        int k = -1;
-        for(int i = 0; i < ids; i++){
-            if(!strcmp(symtab[i].id, (yyvsp[(3) - (3)].s))){
-                k = i;
-                break;
-            }
-        }
-        if(k == -1)
-            location = 255;
-        else
-            location = symtab[k].loc;
-        intToHex(location);
+        findLocation((yyvsp[(3) - (3)].s));
         temp2 += 5; 
     }
     break;
@@ -1998,22 +1889,10 @@ yyreduce:
   case 44:
 
 /* Line 1455 of yacc.c  */
-#line 389 "assemblyParser.y"
+#line 280 "assemblyParser.y"
     { 
         fprintf(yyout, "18");
-        char a, b;
-        int k = -1;
-        for(int i = 0; i < ids; i++){
-            if(!strcmp(symtab[i].id, (yyvsp[(3) - (3)].s))){
-                k = i;
-                break;
-            }
-        }
-        if(k == -1)
-            location = 255;
-        else
-            location = symtab[k].loc;
-        intToHex(location);
+        findLocation((yyvsp[(3) - (3)].s));
         temp2 += 5; 
     }
     break;
@@ -2021,7 +1900,7 @@ yyreduce:
   case 45:
 
 /* Line 1455 of yacc.c  */
-#line 408 "assemblyParser.y"
+#line 287 "assemblyParser.y"
     { 
         intToHex((yyvsp[(1) - (1)].i));
         temp += 4; 
@@ -2031,7 +1910,7 @@ yyreduce:
   case 46:
 
 /* Line 1455 of yacc.c  */
-#line 412 "assemblyParser.y"
+#line 291 "assemblyParser.y"
     { 
         intToHex((yyvsp[(3) - (3)].i));
         temp += 4; 
@@ -2041,7 +1920,7 @@ yyreduce:
 
 
 /* Line 1455 of yacc.c  */
-#line 2045 "y.tab.c"
+#line 1924 "y.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -2253,7 +2132,7 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 418 "assemblyParser.y"
+#line 297 "assemblyParser.y"
 
 
 void intToHex(int num){
@@ -2269,6 +2148,21 @@ void intToHex(int num){
         fprintf(yyout, "%c%c000000\n", a, b);
 }
 
+void findLocation(char *c){
+    int k = -1;
+    for(int i = 0; i < ids; i++){
+        if(!strcmp(symtab[i].id, c)){
+            k = i;
+            break;
+        }
+    }
+    if(k == -1)
+        location = 255;          //invalid or forward reference
+    else
+        location = symtab[k].loc;
+    intToHex(location);
+}
+
 int yyerror(const char *s){
     fclose(yyin);
     fclose(yyout);
@@ -2281,7 +2175,7 @@ int yyerror(const char *s){
 
 
 int main(){
-    // FILE *yyin;
+
     yyin = fopen("assemblyProgram.txt", "r");
     yyout = fopen("machineCode.txt", "w");
     if(yyin == NULL || yyout == NULL){
@@ -2290,8 +2184,8 @@ int main(){
     else{
         yyparse();
     }
-    // for(int i = 0; i < ids; i++)
-    //     printf("%s %d\n", symtab[i].id, symtab[i].loc);
+    for(int i = 0; i < ids; i++)
+    printf("%s %d\n", symtab[i].id, symtab[i].loc);
     fprintf(yyout, "19\n");
     fclose(yyout);
     fclose(yyin);
