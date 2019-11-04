@@ -68,7 +68,7 @@
 /* Copy the first part of user declarations.  */
 
 /* Line 189 of yacc.c  */
-#line 1 ".\\Test.y"
+#line 1 "Validity.y"
 
     #include <stdio.h>
     #include <stdlib.h>
@@ -1322,9 +1322,9 @@ yyreduce:
         case 2:
 
 /* Line 1455 of yacc.c  */
-#line 12 ".\\Test.y"
+#line 12 "Validity.y"
     {
-                        printf("\nComplete\n");
+                        printf("\nValid Expression\n");
                         exit(1);
                       }
     break;
@@ -1332,56 +1332,56 @@ yyreduce:
   case 3:
 
 /* Line 1455 of yacc.c  */
-#line 18 ".\\Test.y"
+#line 18 "Validity.y"
     {printf("+ ");}
     break;
 
   case 4:
 
 /* Line 1455 of yacc.c  */
-#line 19 ".\\Test.y"
+#line 19 "Validity.y"
     {printf("- ");}
     break;
 
   case 5:
 
 /* Line 1455 of yacc.c  */
-#line 20 ".\\Test.y"
+#line 20 "Validity.y"
     {printf("* ");}
     break;
 
   case 6:
 
 /* Line 1455 of yacc.c  */
-#line 21 ".\\Test.y"
+#line 21 "Validity.y"
     {printf("/ ");}
     break;
 
   case 7:
 
 /* Line 1455 of yacc.c  */
-#line 22 ".\\Test.y"
+#line 22 "Validity.y"
     {printf("%%");}
     break;
 
   case 9:
 
 /* Line 1455 of yacc.c  */
-#line 24 ".\\Test.y"
+#line 24 "Validity.y"
     {printf("- ");}
     break;
 
   case 10:
 
 /* Line 1455 of yacc.c  */
-#line 25 ".\\Test.y"
+#line 25 "Validity.y"
     {printf("+ ");}
     break;
 
   case 11:
 
 /* Line 1455 of yacc.c  */
-#line 26 ".\\Test.y"
+#line 26 "Validity.y"
     {printf("%d ",(yyvsp[(1) - (1)]));}
     break;
 
@@ -1600,7 +1600,7 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 29 ".\\Test.y"
+#line 29 "Validity.y"
 
 
 int yyerror(char const *s)

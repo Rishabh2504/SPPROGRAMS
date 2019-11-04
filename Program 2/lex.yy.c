@@ -357,9 +357,9 @@ static char *yy_last_accepting_cpos;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 ".\\CaesarCipher.l"
+#line 1 "CaesarCipher.l"
 #define INITIAL 0
-#line 2 ".\\CaesarCipher.l"
+#line 2 "CaesarCipher.l"
 	char ch;
 #line 365 "lex.yy.c"
 
@@ -512,7 +512,7 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
-#line 4 ".\\CaesarCipher.l"
+#line 4 "CaesarCipher.l"
 
  
  
@@ -601,7 +601,7 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 7 ".\\CaesarCipher.l"
+#line 7 "CaesarCipher.l"
 {
 	ch=yytext[0];
 	if(ch<=90)
@@ -612,7 +612,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 17 ".\\CaesarCipher.l"
+#line 17 "CaesarCipher.l"
 ECHO;
 	YY_BREAK
 #line 619 "lex.yy.c"
@@ -1501,7 +1501,7 @@ int main()
 	return 0;
 	}
 #endif
-#line 17 ".\\CaesarCipher.l"
+#line 17 "CaesarCipher.l"
 
  
  

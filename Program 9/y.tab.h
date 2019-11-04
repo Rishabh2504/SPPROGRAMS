@@ -39,17 +39,13 @@
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     FLOAT = 258,
-     NEWLINE = 259,
-     UMINUS = 260,
-     UADD = 261
+     VAR = 258,
+     NEWLINE = 259
    };
 #endif
 /* Tokens.  */
-#define FLOAT 258
+#define VAR 258
 #define NEWLINE 259
-#define UMINUS 260
-#define UADD 261
 
 
 
@@ -59,14 +55,14 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 5 "Calc.y"
+#line 5 "Validity.y"
 
-        float f;
+    char* s;
 
 
 
 /* Line 1676 of yacc.c  */
-#line 70 "y.tab.h"
+#line 66 "y.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

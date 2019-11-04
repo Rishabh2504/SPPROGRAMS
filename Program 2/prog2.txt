@@ -1,2 +1,1 @@
-this is lex programming
-in this we use lexical analyser and regular expression
+this is a lex program

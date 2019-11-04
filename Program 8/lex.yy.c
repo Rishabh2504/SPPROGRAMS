@@ -357,9 +357,9 @@ static char *yy_last_accepting_cpos;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 ".\\Test.l"
+#line 1 "Validity.l"
 #define INITIAL 0
-#line 2 ".\\Test.l"
+#line 2 "Validity.l"
   #include <stdio.h> 
 	#include "y.tab.h"
 #line 366 "lex.yy.c"
@@ -513,7 +513,7 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
-#line 6 ".\\Test.l"
+#line 6 "Validity.l"
 
 
 #line 520 "lex.yy.c"
@@ -601,7 +601,7 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 8 ".\\Test.l"
+#line 8 "Validity.l"
 {
           yylval = atoi(yytext);
           return DIGIT;
@@ -609,17 +609,17 @@ YY_RULE_SETUP
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 13 ".\\Test.l"
+#line 13 "Validity.l"
 return NEWLINE;
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 14 ".\\Test.l"
+#line 14 "Validity.l"
 return *yytext;
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 16 ".\\Test.l"
+#line 16 "Validity.l"
 ECHO;
 	YY_BREAK
 #line 626 "lex.yy.c"
@@ -1508,7 +1508,7 @@ int main()
 	return 0;
 	}
 #endif
-#line 16 ".\\Test.l"
+#line 16 "Validity.l"
 
 
 int yywrap()

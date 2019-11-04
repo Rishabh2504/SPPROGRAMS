@@ -357,7 +357,7 @@ static char *yy_last_accepting_cpos;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 ".\\program7.l"
+#line 1 "program7.l"
 #define INITIAL 0
 #line 363 "lex.yy.c"
 
@@ -510,7 +510,7 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
-#line 1 ".\\program7.l"
+#line 1 "program7.l"
 
 
 #line 517 "lex.yy.c"
@@ -598,7 +598,7 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 3 ".\\program7.l"
+#line 3 "program7.l"
 {
     int i, j;
     for(i=0;i<yyleng;i++)
@@ -613,7 +613,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 15 ".\\program7.l"
+#line 15 "program7.l"
 ECHO;
 	YY_BREAK
 #line 620 "lex.yy.c"
@@ -1502,7 +1502,7 @@ int main()
 	return 0;
 	}
 #endif
-#line 15 ".\\program7.l"
+#line 15 "program7.l"
 
 
 int main()

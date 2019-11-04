@@ -2,10 +2,15 @@
     #include <stdio.h>
     #include <stdlib.h>
 %}
+%union{
+    char* s;
+}
 
 %token VAR NEWLINE 
 %left '+' '-'
 %left '*' '/' '%'
+
+%type <s> VAR
 
 %%
 
@@ -23,7 +28,7 @@ expr:  expr '+' expr    {printf("+ ");}
   | '(' expr ')'
   | '-' expr             {printf("- ");}
   | '+' expr             {printf("+ ");}
-  | VAR                  {printf("%s ",$1)}
+  | VAR                  {printf("%s",$1);}
   ;
 
 %%

@@ -68,7 +68,7 @@
 /* Copy the first part of user declarations.  */
 
 /* Line 189 of yacc.c  */
-#line 1 ".\\Calc.y"
+#line 1 "Calc.y"
 
     #include <stdio.h>
     #include <stdlib.h>
@@ -122,7 +122,7 @@ typedef union YYSTYPE
 {
 
 /* Line 214 of yacc.c  */
-#line 5 ".\\Calc.y"
+#line 5 "Calc.y"
 
         float f;
 
@@ -1337,7 +1337,7 @@ yyreduce:
         case 2:
 
 /* Line 1455 of yacc.c  */
-#line 16 ".\\Calc.y"
+#line 16 "Calc.y"
     {
                         printf("\nAnswer = %f\n",(yyvsp[(1) - (2)].f));
                         exit(1);
@@ -1347,28 +1347,28 @@ yyreduce:
   case 3:
 
 /* Line 1455 of yacc.c  */
-#line 22 ".\\Calc.y"
+#line 22 "Calc.y"
     {(yyval.f)=(yyvsp[(1) - (3)].f)+(yyvsp[(3) - (3)].f);}
     break;
 
   case 4:
 
 /* Line 1455 of yacc.c  */
-#line 23 ".\\Calc.y"
+#line 23 "Calc.y"
     {(yyval.f)=(yyvsp[(1) - (3)].f)-(yyvsp[(3) - (3)].f);}
     break;
 
   case 5:
 
 /* Line 1455 of yacc.c  */
-#line 24 ".\\Calc.y"
+#line 24 "Calc.y"
     {(yyval.f)=(yyvsp[(1) - (3)].f)*(yyvsp[(3) - (3)].f);}
     break;
 
   case 6:
 
 /* Line 1455 of yacc.c  */
-#line 25 ".\\Calc.y"
+#line 25 "Calc.y"
     {
                             if((yyvsp[(3) - (3)].f)==0.0)
                             {
@@ -1381,21 +1381,21 @@ yyreduce:
   case 7:
 
 /* Line 1455 of yacc.c  */
-#line 32 ".\\Calc.y"
+#line 32 "Calc.y"
     {(yyval.f)=(yyvsp[(2) - (3)].f);}
     break;
 
   case 8:
 
 /* Line 1455 of yacc.c  */
-#line 33 ".\\Calc.y"
+#line 33 "Calc.y"
     {(yyval.f)=-(yyvsp[(2) - (2)].f);}
     break;
 
   case 9:
 
 /* Line 1455 of yacc.c  */
-#line 34 ".\\Calc.y"
+#line 34 "Calc.y"
     {(yyval.f)=(yyvsp[(2) - (2)].f);}
     break;
 
@@ -1614,7 +1614,7 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 39 ".\\Calc.y"
+#line 39 "Calc.y"
 
 
 int yyerror(char const *s)
@@ -1624,6 +1624,7 @@ int yyerror(char const *s)
 }
 int main()
 {
+  printf("Enter The Expression\n");
   yyparse();
   return 1;
 }
