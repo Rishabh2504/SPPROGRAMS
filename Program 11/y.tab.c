@@ -1528,7 +1528,7 @@ yyreturn:
 
 int yyerror(char const *s)
 {
-    printf("Invalid Expression \n");
+    printf("\nInvalid Expression \n");
     return 0;
 }
 int main()

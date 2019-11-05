@@ -39,13 +39,11 @@
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     EXPR = 258,
-     NEWLINE = 259
+     NEWLINE = 258
    };
 #endif
 /* Tokens.  */
-#define EXPR 258
-#define NEWLINE 259
+#define NEWLINE 258
 
 
 

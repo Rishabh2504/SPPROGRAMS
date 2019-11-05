@@ -389,9 +389,9 @@ static char *yy_last_accepting_cpos;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "assemblyParser.l"
+#line 1 "Assembler.l"
 #define INITIAL 0
-#line 4 "assemblyParser.l"
+#line 4 "Assembler.l"
     #include<stdio.h>
     #include<string.h>
     #include "y.tab.h"
@@ -546,7 +546,7 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
-#line 9 "assemblyParser.l"
+#line 9 "Assembler.l"
 
 #line 552 "lex.yy.c"
 
@@ -633,102 +633,102 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 10 "assemblyParser.l"
+#line 10 "Assembler.l"
 return A;
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 11 "assemblyParser.l"
+#line 11 "Assembler.l"
 return B; 
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 12 "assemblyParser.l"
+#line 12 "Assembler.l"
 return C; 
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 13 "assemblyParser.l"
+#line 13 "Assembler.l"
 return I; 
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 14 "assemblyParser.l"
+#line 14 "Assembler.l"
 return DD; 
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 15 "assemblyParser.l"
+#line 15 "Assembler.l"
 return MVI; 
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 16 "assemblyParser.l"
+#line 16 "Assembler.l"
 return LOADI; 
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 17 "assemblyParser.l"
+#line 17 "Assembler.l"
 return STORI; 
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 18 "assemblyParser.l"
+#line 18 "Assembler.l"
 return ADD; 
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 19 "assemblyParser.l"
+#line 19 "Assembler.l"
 return MOV; 
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 20 "assemblyParser.l"
+#line 20 "Assembler.l"
 return INC; 
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 21 "assemblyParser.l"
+#line 21 "Assembler.l"
 return CMP; 
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 22 "assemblyParser.l"
+#line 22 "Assembler.l"
 return JE; 
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 23 "assemblyParser.l"
+#line 23 "Assembler.l"
 return ADDI; 
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 24 "assemblyParser.l"
+#line 24 "Assembler.l"
 return JMP; 
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 25 "assemblyParser.l"
+#line 25 "Assembler.l"
 return LOAD; 
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 26 "assemblyParser.l"
+#line 26 "Assembler.l"
 return STORE; 
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 27 "assemblyParser.l"
+#line 27 "Assembler.l"
 return STOP; 
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 28 "assemblyParser.l"
+#line 28 "Assembler.l"
 return SPACE; 
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 29 "assemblyParser.l"
+#line 29 "Assembler.l"
 { 
                             yylval.i = atoi(yytext);
                             return NUMBER; 
@@ -736,7 +736,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 33 "assemblyParser.l"
+#line 33 "Assembler.l"
 { 
                             char *c = malloc(sizeof(char) * (yyleng + 1));
                             c[yyleng] = 0;
@@ -747,22 +747,22 @@ YY_RULE_SETUP
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 40 "assemblyParser.l"
+#line 40 "Assembler.l"
 return NEWLINE; 
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 41 "assemblyParser.l"
+#line 41 "Assembler.l"
 return COMMENT; 
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 42 "assemblyParser.l"
+#line 42 "Assembler.l"
 return *yytext; 
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 44 "assemblyParser.l"
+#line 44 "Assembler.l"
 ECHO;
 	YY_BREAK
 #line 769 "lex.yy.c"
@@ -1651,7 +1651,7 @@ int main()
 	return 0;
 	}
 #endif
-#line 44 "assemblyParser.l"
+#line 44 "Assembler.l"
 
 
 int yywrap(){
